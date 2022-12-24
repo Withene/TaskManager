@@ -6,6 +6,7 @@ import Routers from "./router/RoutersComponent";
 
 import Customtheme from "./themes/theme";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ContainerComponent from "./pages/Container/ContainerComponent";
 
 
 const colorModeManager: StorageManager = {
@@ -32,9 +33,13 @@ export default function App() {
 
     return (
         <NativeBaseProvider theme={Customtheme} colorModeManager={colorModeManager} >
-            <NavigationContainer>
-                    <Routers/>
-            </NavigationContainer>
+
+                <NavigationContainer>
+                    <ContainerComponent>
+                        <Routers/>
+                    </ContainerComponent>
+                </NavigationContainer>
+
         </NativeBaseProvider>
     );
 }
