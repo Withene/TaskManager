@@ -6,27 +6,10 @@ import { StyleSheet, TouchableOpacity } from 'react-native'
 import * as Animatable from 'react-native-animatable';
 import {TodoListComponent} from "../pages/TodoList/TodoListComponent";
 import {Colors} from "react-native/Libraries/NewAppScreen";
+import HomeScreen from "../pages/HomePage/HomeComponente";
+
 
 const Tab = createBottomTabNavigator();
-
-function HomeScreen() {
-    const {
-        toggleColorMode
-    } = useColorMode();
-    const bg = useColorModeValue("warmGray.50", "coolGray.800");
-
-    const viewRef = useRef(null);
-    return (
-                        <Center bg={bg} style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} safeArea>
-                            <Text>Home!!a</Text>
-                            <Button onPress={toggleColorMode} h={10}>
-                                Toggle
-                            </Button>
-                        </Center>
-
-
-    );
-}
 
 function HomeScreen2() {
     const bg = useColorModeValue("warmGray.50", "coolGray.800");
@@ -50,16 +33,16 @@ const TabButton = (props:any) => {
     const { item, onPress, accessibilityState } = props;
     const focused = accessibilityState.selected;
     const viewRef = useRef(null) as any;
-    const textViewRef = useRef(null)  as any;
+    // const textViewRef = useRef(null)  as any;
 
     useEffect(() => {
         if (focused) {
             viewRef.current.animate( { 0: { scale: .5, translateY: 0 }, .80: { translateY: -7 }, 1: { scale: 1.2, translateY: 0 } });
-            textViewRef.current.animate("slideInUp");
+            // textViewRef.current.animate("slideInUp");
 
         } else {
             viewRef.current.animate({ 0: { scale: 1.2, translateY: 0 }, 1: { scale: 1, translateY: 0 } });
-            textViewRef.current.animate("slideOutDown");
+            // textViewRef.current.animate("slideOutDown");
 
 
         }
@@ -85,14 +68,14 @@ const TabButton = (props:any) => {
                 }}
                >
                     <Ionicons name={focused ? item.activeIcon : item.inActiveIcon} size={20} color={"black"}/>
-                    <Animatable.View
-                        ref={textViewRef}
-                        duration={400}
-                        >
-                        {focused && <Text  fontSize="xs" style={{
-                            color: Colors.black, paddingHorizontal: 8
-                        }}>{item.label}</Text>}
-                    </Animatable.View>
+                    {/*<Animatable.View*/}
+                    {/*    ref={textViewRef}*/}
+                    {/*    duration={400}*/}
+                    {/*    >*/}
+                    {/*    {focused && <Text  fontSize="xs" style={{*/}
+                    {/*        color: Colors.black, paddingHorizontal: 8*/}
+                    {/*    }}>{item.label}</Text>}*/}
+                    {/*</Animatable.View>*/}
 
             </Animatable.View>
 
@@ -113,10 +96,11 @@ export default function Routers() {
                 tabBarStyle: {
                     height: 50,
                     position: 'absolute',
-                    bottom: 16,
-                    right: 16,
-                    left: 16,
-                    borderRadius: 16,
+                    // bottom: 16,
+                    // right: 16,
+                    // left: 16,
+                    borderTopEndRadius: 16,
+                    borderTopStartRadius: 16,
                     // backgroundColor: 'transparent',
                     borderTopWidth: 0,
                     // elevation: 0
@@ -131,6 +115,10 @@ export default function Routers() {
                     <Tab.Screen key={index} name={item.route} component={item.component}
                                 options={{
                                     // tabBarShowLabel: false,
+                                    // unmountOnBlur: true,
+
+
+
                                     tabBarButton: (props) => <TabButton {...props} item={item} />
                                 }}
 

@@ -7,7 +7,7 @@ import Routers from "./router/RoutersComponent";
 import Customtheme from "./themes/theme";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ContainerComponent from "./pages/Container/ContainerComponent";
-
+import  "./config/DefaultConfigDate";
 
 const colorModeManager: StorageManager = {
     get: async () => {
@@ -15,7 +15,7 @@ const colorModeManager: StorageManager = {
             let val = await AsyncStorage.getItem('@color-mode');
             return val === 'dark' ? 'dark' : 'light';
         } catch (e) {
-            return 'dark';
+            return 'light';
         }
     },
     set: async (value: ColorMode) => {
